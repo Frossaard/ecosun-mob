@@ -45,11 +45,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#0a7ea4',
     paddingVertical: 16,
     paddingHorizontal: 24,
-    borderRadius: 16,
-    shadowColor: '#0a7ea4',
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 5 },
+borderRadius: 16,
+    boxShadow: '0 5px 10px rgba(10, 126, 164, 0.3)',
     elevation: 4,
   },
   buttonDisabled: {
