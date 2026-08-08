@@ -16,9 +16,9 @@ export function ChipSelect<T extends string>({
   onChange,
 }: ChipSelectProps<T>) {
   return (
-    <ThemedView style={styles.wrapper}>
+    <ThemedView lightColor="transparent" style={styles.wrapper}>
       <Text style={styles.label}>{label}</Text>
-      <ThemedView style={styles.row}>
+      <ThemedView lightColor="transparent" style={styles.row}>
         {options.map((opt) => {
           const selected = opt.value === value;
           return (
@@ -41,31 +41,33 @@ const styles = StyleSheet.create({
   wrapper: {
     gap: 8,
     marginBottom: 16,
+    backgroundColor: 'transparent',
   },
   label: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#37474f',
+    color: '#111827',
   },
   row: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 8,
+    backgroundColor: 'transparent',
   },
   chip: {
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 24,
     borderWidth: 1,
-    borderColor: '#e0e3e5',
-    backgroundColor: '#f5f7f8',
+    borderColor: '#E5E7EB',
+    backgroundColor: '#F1F3F5',
   },
   chipSelected: {
     backgroundColor: '#0a7ea4',
     borderColor: '#0a7ea4',
   },
   chipText: {
-    color: '#37474f',
+    color: '#111827',
     fontSize: 14,
     fontWeight: '600',
   },

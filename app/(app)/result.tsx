@@ -104,9 +104,9 @@ export default function ResultScreen() {
 }
 
 const styles = StyleSheet.create({
-  safe: {
+safe: {
     flex: 1,
-    backgroundColor: '#f2f7f9',
+    backgroundColor: '#F7F8FA',
   },
   content: {
     flex: 1,

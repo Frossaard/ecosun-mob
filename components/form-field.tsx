@@ -9,7 +9,7 @@ interface FormFieldProps extends TextInputProps {
 
 export function FormField({ label, hint, ...inputProps }: FormFieldProps) {
   return (
-    <ThemedView style={styles.wrapper}>
+    <ThemedView lightColor="transparent" style={styles.wrapper}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         placeholderTextColor="#9aa0a6"
@@ -25,24 +25,25 @@ const styles = StyleSheet.create({
   wrapper: {
     gap: 6,
     marginBottom: 16,
+    backgroundColor: 'transparent',
   },
   label: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#37474f',
+    color: '#111827',
   },
   input: {
-    backgroundColor: '#f5f7f8',
+    backgroundColor: '#FFFFFF',
     borderWidth: 1,
-    borderColor: '#e0e3e5',
+    borderColor: '#E5E7EB',
     borderRadius: 14,
     paddingHorizontal: 16,
     paddingVertical: 14,
     fontSize: 16,
-    color: '#11181c',
+    color: '#111827',
   },
   hint: {
     fontSize: 12,
-    color: '#8a9196',
+    color: '#6B7280',
   },
 });

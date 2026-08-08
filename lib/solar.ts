@@ -8,7 +8,7 @@
 /**
  * Tipos e parâmetros de entrada.
  */
-export type TipoResidencia = 'casa' | 'apartamento' | 'comercio' | 'sitio';
+export type TipoResidencia = 'casa' | 'comercio' | 'sitio';
 
 export interface ResidenciaInput {
   consumoMensalKwh: number;
@@ -235,8 +235,8 @@ export function dimensionarKit(input: ResidenciaInput): KitResultado {
 
   // Estrutura
   const areaNecessariaM2 = Math.ceil(quantidadePlacas * PLACA.dimensaoM2);
-  const tipoEstrutura: 'Telhado' | 'Solo' =
-    input.tipo === 'apartamento' || input.tipo === 'comercio' ? 'Telhado' : 'Solo';
+const tipoEstrutura: 'Telhado' | 'Solo' =
+    input.tipo === 'comercio' ? 'Telhado' : 'Solo';
 
   // Economia estimada
   const economiaMensalBRL = Math.round(geracaoMensalKwh * tarifa);

@@ -31,3 +31,29 @@ class KitStore {
 }
 
 export const kitStore = new KitStore();
+
+/** Dados do perfil do usuário (mantidos em memória durante a sessão). */
+export interface DadosPerfil {
+  nome: string;
+  email: string;
+  telefone?: string;
+  foto?: string | null;
+}
+
+class PerfilStore {
+  private dados: DadosPerfil | null = null;
+
+  set(dados: DadosPerfil) {
+    this.dados = dados;
+  }
+
+  get(): DadosPerfil | null {
+    return this.dados;
+  }
+
+  clear() {
+    this.dados = null;
+  }
+}
+
+export const perfilStore = new PerfilStore();

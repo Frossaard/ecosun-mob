@@ -156,9 +156,9 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-  safe: {
+safe: {
     flex: 1,
-    backgroundColor: '#f2f7f9',
+    backgroundColor: '#F7F8FA',
   },
   flex: {
     flex: 1,
@@ -227,15 +227,15 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#37474f',
+    color: '#111827',
   },
-  inputWrap: {
+inputWrap: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 10,
-    backgroundColor: '#f5f7f8',
+    backgroundColor: '#FFFFFF',
     borderWidth: 1,
-    borderColor: '#e0e3e5',
+    borderColor: '#E5E7EB',
     borderRadius: 14,
     paddingHorizontal: 14,
   },

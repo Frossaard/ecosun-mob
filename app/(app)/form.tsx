@@ -22,7 +22,6 @@ import { kitStore } from '@/lib/store';
 
 const TIPOS: { value: TipoResidencia; label: string }[] = [
   { value: 'casa', label: 'Casa' },
-  { value: 'apartamento', label: 'Apartamento' },
   { value: 'comercio', label: 'Comércio' },
   { value: 'sitio', label: 'Sítio' },
 ];
@@ -50,7 +49,7 @@ export default function FormScreen() {
       setErro('Informe um consumo médio válido em kWh.');
       return;
     }
-    if (!tipo) {
+if (!tipo) {
       setErro('Selecione o tipo de residência.');
       return;
     }
@@ -176,9 +175,9 @@ export default function FormScreen() {
 }
 
 const styles = StyleSheet.create({
-  safe: {
+safe: {
     flex: 1,
-    backgroundColor: '#f2f7f9',
+    backgroundColor: '#F7F8FA',
   },
   flex: {
     flex: 1,
@@ -224,13 +223,13 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 8,
   },
-  eqChip: {
+eqChip: {
     paddingHorizontal: 14,
     paddingVertical: 9,
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: '#e0e3e5',
-    backgroundColor: '#f5f7f8',
+    borderColor: '#E5E7EB',
+    backgroundColor: '#F1F3F5',
   },
   eqChipSelected: {
     backgroundColor: '#fff3e0',
