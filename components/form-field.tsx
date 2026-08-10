@@ -23,27 +23,29 @@ export function FormField({ label, hint, ...inputProps }: FormFieldProps) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    gap: 6,
-    marginBottom: 16,
+    gap: 7,
+    marginBottom: 18,
     backgroundColor: 'transparent',
   },
   label: {
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: '700',
     color: '#111827',
   },
   input: {
     backgroundColor: '#FFFFFF',
     borderWidth: 1,
     borderColor: '#E5E7EB',
-    borderRadius: 14,
+    borderRadius: 12,
     paddingHorizontal: 16,
-    paddingVertical: 14,
+    paddingVertical: 13,
+    minHeight: 52,
     fontSize: 16,
     color: '#111827',
   },
   hint: {
     fontSize: 12,
     color: '#6B7280',
+    lineHeight: 17,
   },
 });

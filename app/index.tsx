@@ -177,11 +177,11 @@ safe: {
     width: 92,
     height: 92,
     borderRadius: 30,
-    backgroundColor: '#0a7ea4',
+    backgroundColor: '#rgb(6, 79, 104)',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
-    shadowColor: '#0a7ea4',
+    shadowColor: '#rgb(6, 79, 104)',
     shadowOpacity: 0.35,
     shadowRadius: 14,
     shadowOffset: { width: 0, height: 6 },
@@ -190,7 +190,7 @@ safe: {
   brandName: {
     fontSize: 34,
     fontWeight: '800',
-    color: '#0a7ea4',
+    color: '#rgb(6, 79, 104)',
     letterSpacing: 0.5,
   },
   brandTagline: {
@@ -256,7 +256,7 @@ inputWrap: {
     paddingVertical: 8,
   },
   demoText: {
-    color: '#0a7ea4',
+    color: '#rgb(6, 79, 104)',
     fontSize: 14,
     fontWeight: '600',
   },

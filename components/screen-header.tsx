@@ -21,30 +21,34 @@ export function ScreenHeader({ title, subtitle, step }: ScreenHeaderProps) {
 
 const styles = StyleSheet.create({
   safe: {
-    backgroundColor: '#0a7ea4',
+    backgroundColor: '#rgb(6, 79, 104)',
   },
   header: {
-    paddingHorizontal: 20,
-    paddingTop: 12,
-    paddingBottom: 24,
+    paddingHorizontal: 24,
+    paddingTop: 16,
+    paddingBottom: 28,
+    backgroundColor: '#rgb(6, 79, 104)',
   },
   step: {
-    color: '#bfe6f2',
-    fontSize: 13,
+    alignSelf: 'flex-start',
+    color: '#E0ECFF',
+    fontSize: 12,
     fontWeight: '700',
     textTransform: 'uppercase',
-    letterSpacing: 1,
-    marginBottom: 6,
+    letterSpacing: 0.8,
+    marginBottom: 10,
   },
   title: {
     color: '#fff',
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: '800',
+    letterSpacing: -0.5,
   },
   subtitle: {
-    color: '#e6f7fc',
+    color: '#E7F0FF',
     fontSize: 15,
-    marginTop: 6,
-    lineHeight: 21,
+    marginTop: 8,
+    lineHeight: 22,
+    maxWidth: 340,
   },
 });

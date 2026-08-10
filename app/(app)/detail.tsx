@@ -17,7 +17,7 @@ export default function DetailScreen() {
     return (
       <SafeAreaView style={styles.safe}>
         <ThemedView style={styles.empty}>
-          <MaterialIcons name="error-outline" size={40} color="#0a7ea4" />
+          <MaterialIcons name="error-outline" size={40} color="#0B3D91" />
           <Text style={styles.emptyTitle}>Nenhum kit disponível</Text>
           <PrimaryButton title="Gerar novo kit" onPress={() => router.replace('/')} />
         </ThemedView>
@@ -92,7 +92,7 @@ export default function DetailScreen() {
             </View>
           </View>
           <View style={styles.paybackBox}>
-            <MaterialIcons name="schedule" size={20} color="#0a7ea4" />
+            <MaterialIcons name="schedule" size={20} color="#0B3D91" />
             <Text style={styles.paybackText}>
               Tempo estimado de retorno: <Text style={styles.paybackStrong}>{resultado.paybackAnos} anos</Text>.
             </Text>
@@ -151,11 +151,11 @@ safe: {
     paddingBottom: 40,
   },
   summaryCard: {
-    backgroundColor: '#0a7ea4',
+    backgroundColor: '#0B3D91',
     borderRadius: 22,
     padding: 22,
     marginBottom: 16,
-    shadowColor: '#0a7ea4',
+    shadowColor: '#0B3D91',
     shadowOpacity: 0.3,
     shadowRadius: 12,
     shadowOffset: { width: 0, height: 6 },
@@ -219,7 +219,7 @@ safe: {
   itemValor: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#0a7ea4',
+    color: '#0B3D91',
   },
   metricRow: {
     flexDirection: 'row',
@@ -232,7 +232,7 @@ safe: {
   metricValue: {
     fontSize: 24,
     fontWeight: '800',
-    color: '#0a7ea4',
+    color: '#0B3D91',
   },
   metricLabel: {
     fontSize: 13,
@@ -254,7 +254,7 @@ safe: {
     marginTop: 14,
   },
   paybackText: {
-    color: '#0a7ea4',
+    color: '#0B3D91',
     fontSize: 14,
     flex: 1,
   },

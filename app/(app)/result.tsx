@@ -19,7 +19,7 @@ export default function ResultScreen() {
     return (
       <SafeAreaView style={styles.safe}>
         <ThemedView style={styles.empty}>
-          <MaterialIcons name="error-outline" size={40} color="#0a7ea4" />
+          <MaterialIcons name="error-outline" size={40} color="#0B3D91" />
           <Text style={styles.emptyTitle}>Nenhum kit gerado</Text>
           <Text style={styles.emptyText}>Preencha os dados para gerar seu kit.</Text>
           <PrimaryButton title="Voltar ao início" onPress={() => router.replace('/')} />
@@ -113,12 +113,12 @@ safe: {
     padding: 20,
   },
   hero: {
-    backgroundColor: '#0a7ea4',
+    backgroundColor: '#0B3D91',
     borderRadius: 22,
     padding: 22,
     alignItems: 'center',
     marginBottom: 16,
-    shadowColor: '#0a7ea4',
+    shadowColor: '#0B3D91',
     shadowOpacity: 0.3,
     shadowRadius: 12,
     shadowOffset: { width: 0, height: 6 },

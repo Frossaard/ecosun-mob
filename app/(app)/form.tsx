@@ -4,10 +4,10 @@ import { useState } from 'react';
 import {
     KeyboardAvoidingView,
     Platform,
-    Pressable,
     ScrollView,
     StyleSheet,
     Text,
+    TouchableOpacity,
     View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -20,10 +20,10 @@ import { ThemedView } from '@/components/themed-view';
 import { dimensionarKit, EQUIPAMENTOS, type TipoResidencia } from '@/lib/solar';
 import { kitStore } from '@/lib/store';
 
-const TIPOS: { value: TipoResidencia; label: string }[] = [
-  { value: 'casa', label: 'Casa' },
-  { value: 'comercio', label: 'Comércio' },
-  { value: 'sitio', label: 'Sítio' },
+const TIPOS: { value: TipoResidencia; label: string; icon: 'home-outline' | 'storefront-outline' | 'tree-outline' }[] = [
+  { value: 'casa', label: 'Casa', icon: 'home-outline' },
+  { value: 'comercio', label: 'Comércio', icon: 'storefront-outline' },
+  { value: 'sitio', label: 'Sítio', icon: 'tree-outline' },
 ];
 
 export default function FormScreen() {
@@ -147,14 +147,15 @@ if (!tipo) {
               {EQUIPAMENTOS.map((eq) => {
                 const selected = equipamentos.includes(eq.label);
                 return (
-                  <Pressable
+                  <TouchableOpacity
                     key={eq.label}
                     onPress={() => toggleEquipamento(eq.label)}
+                    activeOpacity={0.78}
                     style={[styles.eqChip, selected && styles.eqChipSelected]}>
                     <Text style={[styles.eqText, selected && styles.eqTextSelected]}>
                       {eq.label}
                     </Text>
-                  </Pressable>
+                  </TouchableOpacity>
                 );
               })}
             </View>
@@ -167,7 +168,7 @@ if (!tipo) {
             </View>
           ) : null}
 
-          <PrimaryButton title="Gerar meu kit" onPress={gerarKit} icon="⚡" />
+          <PrimaryButton title="Continuar" onPress={gerarKit} icon="→" />
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -183,17 +184,18 @@ safe: {
     flex: 1,
   },
   content: {
-    padding: 20,
-    paddingBottom: 40,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 36,
   },
   card: {
     backgroundColor: '#fff',
-    borderRadius: 20,
-    padding: 18,
-    marginBottom: 16,
+    borderRadius: 18,
+    padding: 20,
+    marginBottom: 18,
     shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
+    shadowOpacity: 0.06,
+    shadowRadius: 14,
     shadowOffset: { width: 0, height: 4 },
     elevation: 2,
   },
@@ -209,39 +211,39 @@ safe: {
   },
   sectionTitle: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#11181c',
+    fontWeight: '800',
+    color: '#111827',
   },
   sectionHint: {
     fontSize: 13,
-    color: '#7a8288',
+    color: '#6B7280',
     marginTop: 4,
     marginBottom: 14,
   },
   chipWrap: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
+    gap: 9,
   },
 eqChip: {
     paddingHorizontal: 14,
-    paddingVertical: 9,
-    borderRadius: 20,
+    paddingVertical: 10,
+    borderRadius: 22,
     borderWidth: 1,
     borderColor: '#E5E7EB',
-    backgroundColor: '#F1F3F5',
+    backgroundColor: '#F8FAFC',
   },
   eqChipSelected: {
-    backgroundColor: '#fff3e0',
-    borderColor: '#f59e0b',
+    backgroundColor: '#EAF2FF',
+    borderColor: '#0B3D91',
   },
   eqText: {
     fontSize: 13,
-    color: '#37474f',
+    color: '#374151',
     fontWeight: '600',
   },
   eqTextSelected: {
-    color: '#b45309',
+    color: '#0B3D91',
   },
   erroBox: {
     flexDirection: 'row',

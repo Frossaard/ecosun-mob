@@ -79,7 +79,7 @@ export default function PerfilScreen() {
                 <Image source={{ uri: foto }} style={styles.avatar} />
               ) : (
                 <View style={styles.avatarPlaceholder}>
-                  <MaterialIcons name="person" size={56} color="#0a7ea4" />
+                  <MaterialIcons name="person" size={56} color="#0B3D91" />
                 </View>
               )}
               <View style={styles.cameraBadge}>
@@ -137,7 +137,7 @@ export default function PerfilScreen() {
             ) : (
               <>
                 <View style={styles.infoRow}>
-                  <MaterialIcons name="person" size={22} color="#0a7ea4" />
+                  <MaterialIcons name="person" size={22} color="#0B3D91" />
                   <View style={styles.infoTextWrap}>
                     <Text style={styles.infoLabel}>Nome</Text>
                     <Text style={styles.infoValue}>{nome}</Text>
@@ -145,7 +145,7 @@ export default function PerfilScreen() {
                 </View>
                 <View style={styles.divider} />
                 <View style={styles.infoRow}>
-                  <MaterialIcons name="mail-outline" size={22} color="#0a7ea4" />
+                  <MaterialIcons name="mail-outline" size={22} color="#0B3D91" />
                   <View style={styles.infoTextWrap}>
                     <Text style={styles.infoLabel}>E-mail</Text>
                     <Text style={styles.infoValue}>{email}</Text>
@@ -153,7 +153,7 @@ export default function PerfilScreen() {
                 </View>
                 <View style={styles.divider} />
                 <View style={styles.infoRow}>
-                  <MaterialIcons name="phone" size={22} color="#0a7ea4" />
+                  <MaterialIcons name="phone" size={22} color="#0B3D91" />
                   <View style={styles.infoTextWrap}>
                     <Text style={styles.infoLabel}>Telefone</Text>
                     <Text style={styles.infoValue}>{telefone || 'Não informado'}</Text>
@@ -178,7 +178,7 @@ export default function PerfilScreen() {
           </ThemedView>
 
           <Pressable style={styles.fotoButton} onPress={alterarFoto}>
-            <MaterialIcons name="add-a-photo" size={20} color="#0a7ea4" />
+            <MaterialIcons name="add-a-photo" size={20} color="#0B3D91" />
             <Text style={styles.fotoButtonText}>Alterar foto</Text>
           </Pressable>
         </ScrollView>
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 3,
-    borderColor: '#0a7ea4',
+    borderColor: '#0B3D91',
   },
   cameraBadge: {
     position: 'absolute',
@@ -238,7 +238,7 @@ const styles = StyleSheet.create({
     width: 34,
     height: 34,
     borderRadius: 17,
-    backgroundColor: '#0a7ea4',
+    backgroundColor: '#0B3D91',
     alignItems: 'center',
     justifyContent: 'center',
     borderWidth: 3,
@@ -321,7 +321,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    backgroundColor: '#0a7ea4',
+    backgroundColor: '#0B3D91',
     paddingVertical: 14,
     borderRadius: 14,
   },
@@ -335,7 +335,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 8,
-    backgroundColor: '#0a7ea4',
+    backgroundColor: '#0B3D91',
     paddingVertical: 14,
     borderRadius: 14,
   },
@@ -351,12 +351,12 @@ const styles = StyleSheet.create({
     gap: 8,
     backgroundColor: '#fff',
     borderWidth: 1,
-    borderColor: '#0a7ea4',
+    borderColor: '#0B3D91',
     paddingVertical: 14,
     borderRadius: 14,
   },
   fotoButtonText: {
-    color: '#0a7ea4',
+    color: '#0B3D91',
     fontSize: 16,
     fontWeight: '700',
   },

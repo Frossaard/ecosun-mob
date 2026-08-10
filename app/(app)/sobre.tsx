@@ -75,7 +75,7 @@ export default function SobreScreen() {
             {IMPORTANCIA.map((item) => (
               <View key={item.titulo} style={styles.item}>
                 <View style={styles.iconCircle}>
-                  <MaterialIcons name={item.icon} size={22} color="#0a7ea4" />
+                  <MaterialIcons name={item.icon} size={22} color="#0B3D91" />
                 </View>
                 <View style={styles.itemTextWrap}>
                   <Text style={styles.itemTitle}>{item.titulo}</Text>
@@ -125,12 +125,12 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   heroCard: {
-    backgroundColor: '#0a7ea4',
+    backgroundColor: '#0B3D91',
     borderRadius: 22,
     padding: 24,
     marginBottom: 16,
     alignItems: 'center',
-    shadowColor: '#0a7ea4',
+    shadowColor: '#0B3D91',
     shadowOpacity: 0.3,
     shadowRadius: 12,
     shadowOffset: { width: 0, height: 6 },

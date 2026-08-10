@@ -22,7 +22,7 @@ const LightTheme = {
     card: '#FFFFFF',
     text: '#111827',
     border: '#E5E7EB',
-    primary: '#0a7ea4',
+    primary: '#rgb(6, 79, 104)',
   },
 };
 

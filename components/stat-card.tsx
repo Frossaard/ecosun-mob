@@ -33,8 +33,8 @@ borderWidth: 1,
     minWidth: 120,
   },
   cardHighlight: {
-    backgroundColor: '#0a7ea4',
-    borderColor: '#0a7ea4',
+    backgroundColor: '#0B3D91',
+    borderColor: '#0B3D91',
   },
   cardBig: {
     flex: 1.6,
@@ -46,7 +46,7 @@ borderWidth: 1,
   value: {
     fontSize: 22,
     fontWeight: '800',
-    color: '#0a7ea4',
+    color: '#0B3D91',
   },
   valueHighlight: {
     color: '#fff',

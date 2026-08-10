@@ -116,14 +116,14 @@ const styles = StyleSheet.create({
     width: 52,
     height: 52,
     borderRadius: 16,
-    backgroundColor: '#0a7ea4',
+    backgroundColor: 'rgb(6, 79, 104)',
     alignItems: 'center',
     justifyContent: 'center',
   },
   brandName: {
     fontSize: 22,
     fontWeight: '800',
-    color: '#0a7ea4',
+    color: '#rgb(6, 79, 104)',
   },
   brandTagline: {
     fontSize: 13,
@@ -157,14 +157,14 @@ const styles = StyleSheet.create({
     color: '#37474f',
   },
   itemLabelAtivo: {
-    color: '#0a7ea4',
+    color: '#rgb(6, 79, 104)',
     fontWeight: '700',
   },
   itemDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: '#0a7ea4',
+    backgroundColor: '#rgb(6, 79, 104)',
   },
   footerArea: {
     marginTop: 'auto',
