@@ -57,3 +57,27 @@ class PerfilStore {
 }
 
 export const perfilStore = new PerfilStore();
+
+/**
+ * Histórico simples (em memória) de resultados de simulações.
+ * Persistência pode ser adicionada posteriormente via AsyncStorage/expo-file-system.
+ */
+class HistoryStore {
+  private items: { id: string; input: any; resultado: any; createdAt: number }[] = [];
+
+  add(input: any, resultado: any) {
+    const id = String(Date.now());
+    this.items.unshift({ id, input, resultado, createdAt: Date.now() });
+    return id;
+  }
+
+  list() {
+    return this.items.slice();
+  }
+
+  clear() {
+    this.items = [];
+  }
+}
+
+export const historyStore = new HistoryStore();
