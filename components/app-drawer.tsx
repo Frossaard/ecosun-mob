@@ -1,47 +1,33 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import {
-  DrawerContentComponentProps,
-  DrawerContentScrollView,
-  DrawerItem,
-} from '@react-navigation/drawer';
-import { useRouter } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { usePathname, useRouter } from 'expo-router';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { kitStore } from '@/lib/store';
 
 const MENU_ITENS = [
-  { rota: 'form', label: 'Início', icon: 'home' as const },
-  { rota: 'perfil', label: 'Meu Perfil', icon: 'person' as const },
-  { rota: 'sobre', label: 'Sobre Nós', icon: 'info-outline' as const },
+  { rota: '/(app)/form', label: 'Início', icon: 'home' as const },
+  { rota: '/(app)/perfil', label: 'Meu Perfil', icon: 'person' as const },
+  { rota: '/(app)/sobre', label: 'Sobre Nós', icon: 'info-outline' as const },
 ];
 
-export function AppDrawer(props: DrawerContentComponentProps) {
-  const { state, navigation } = props;
+/** Um menu reutilizável baseado exclusivamente nas rotas de arquivos do Expo Router. */
+export function AppDrawer() {
   const router = useRouter();
-
-  // Rota atualmente ativa dentro do drawer.
-  const rotaAtiva = state.routes[state.index]?.name;
+  const pathname = usePathname();
 
   function navegar(rota: string) {
-    navigation.navigate(rota);
+    router.push(rota as '/(app)/form' | '/(app)/perfil' | '/(app)/sobre');
   }
 
   function sair() {
     kitStore.clear();
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'form' }],
-    });
     router.replace('/');
   }
 
   return (
     <SafeAreaView style={styles.safe} edges={['bottom']}>
-      <DrawerContentScrollView
-        {...props}
-        contentContainerStyle={styles.scroll}
-        showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         {/* Cabeçalho da marca */}
         <View style={styles.brand}>
           <View style={styles.logoCircle}>
@@ -58,7 +44,7 @@ export function AppDrawer(props: DrawerContentComponentProps) {
         {/* Itens do menu */}
         <View style={styles.menu}>
           {MENU_ITENS.map((item) => {
-            const ativo = rotaAtiva === item.rota;
+            const ativo = pathname === item.rota.replace('/(app)', '');
             return (
               <Pressable
                 key={item.rota}
@@ -88,13 +74,10 @@ export function AppDrawer(props: DrawerContentComponentProps) {
           </Pressable>
           <Text style={styles.versao}>EcoSun AI • v1.0.0</Text>
         </View>
-      </DrawerContentScrollView>
+      </ScrollView>
     </SafeAreaView>
   );
 }
-
-// Mantém o DrawerItem importado para não quebrar possíveis integrações futuras.
-export const _DrawerItem = DrawerItem;
 
 const styles = StyleSheet.create({
   safe: {
