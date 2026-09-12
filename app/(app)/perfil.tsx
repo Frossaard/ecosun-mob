@@ -2,22 +2,22 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
-  KeyboardAvoidingView,
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
+    KeyboardAvoidingView,
+    Platform,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ScreenHeader } from '@/components/screen-header';
 import { ThemedView } from '@/components/themed-view';
+import { useAuth } from '@/lib/auth';
 import { useSettingsMenu } from '@/lib/settings-menu';
 import { perfilStore } from '@/lib/store';
-import { useAuth } from '@/lib/auth';
 
 export default function PerfilScreen() {
   const perfil = perfilStore.get();

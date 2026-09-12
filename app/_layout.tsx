@@ -1,9 +1,9 @@
 
+import { AuthGate, AuthProvider } from '@/lib/auth';
+import { SettingsMenuProvider } from '@/lib/settings-menu';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
-import { AuthGate, AuthProvider } from '@/lib/auth';
-import { SettingsMenuProvider } from '@/lib/settings-menu';
 
 export const unstable_settings = {
   anchor: '(app)',

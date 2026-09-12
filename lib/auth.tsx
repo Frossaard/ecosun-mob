@@ -2,8 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { usePathname, useRouter, useSegments } from 'expo-router';
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from 'react';
 
-import { perfilStore } from '@/lib/store';
 import { autenticarUsuario, cadastrarUsuario } from '@/lib/api';
+import { perfilStore } from '@/lib/store';
 
 export interface Usuario {
   nome: string;

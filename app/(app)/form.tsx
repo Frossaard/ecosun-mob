@@ -19,9 +19,9 @@ import { ScreenHeader } from '@/components/screen-header';
 import { SettingsDrawer } from '@/components/settings-drawer';
 import { ThemedView } from '@/components/themed-view';
 import { salvarSimulacao } from '@/lib/api';
+import { useSettingsMenu } from '@/lib/settings-menu';
 import { dimensionarKit, EQUIPAMENTOS, type TipoResidencia } from '@/lib/solar';
 import { kitStore, perfilStore } from '@/lib/store';
-import { useSettingsMenu } from '@/lib/settings-menu';
 
 const TIPOS: { value: TipoResidencia; label: string; icon: 'home-outline' | 'storefront-outline' | 'tree-outline' }[] = [
   { value: 'casa', label: 'Casa', icon: 'home-outline' },
