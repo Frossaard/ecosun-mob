@@ -1,0 +1,17 @@
+{
+  "name": "ecosun-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "inspect:schema": "node scripts/inspect-schema.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "mssql": "^11.0.1"
+  }
+}

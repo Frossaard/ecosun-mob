@@ -1,8 +1,7 @@
 import { MaterialIcons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
+import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
-  Image,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -16,54 +15,48 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ScreenHeader } from '@/components/screen-header';
 import { ThemedView } from '@/components/themed-view';
+import { useSettingsMenu } from '@/lib/settings-menu';
 import { perfilStore } from '@/lib/store';
+import { useAuth } from '@/lib/auth';
 
 export default function PerfilScreen() {
   const perfil = perfilStore.get();
-  const [foto, setFoto] = useState<string | null>(perfil?.foto ?? null);
-  const [nome, setNome] = useState(perfil?.nome ?? 'Usuário EcoSun');
-  const [email, setEmail] = useState(perfil?.email ?? 'usuario@ecosun.com.br');
-  const [telefone, setTelefone] = useState(perfil?.telefone ?? '');
+  const router = useRouter();
+  const { setOpen } = useSettingsMenu();
+  const { usuario, atualizarUsuario, sair } = useAuth();
+  const [nome, setNome] = useState(usuario?.nome ?? perfil?.nome ?? 'Usuário EcoSun');
+  const [email, setEmail] = useState(usuario?.email ?? perfil?.email ?? 'usuario@ecosun.com.br');
+  const [telefone, setTelefone] = useState(usuario?.telefone ?? perfil?.telefone ?? '');
   const [editando, setEditando] = useState(false);
 
   function salvarPerfil() {
     perfilStore.set({
-      foto,
       nome: nome.trim() || 'Usuário EcoSun',
       email: email.trim() || 'usuario@ecosun.com.br',
       telefone: telefone.trim(),
     });
+    void atualizarUsuario({ nome: nome.trim() || 'Usuário EcoSun', email: email.trim() || 'usuario@ecosun.com.br', telefone: telefone.trim(), senha: usuario?.senha ?? '' });
     setNome(nome.trim() || 'Usuário EcoSun');
     setEmail(email.trim() || 'usuario@ecosun.com.br');
     setEditando(false);
   }
 
-  async function alterarFoto() {
-    const permissao = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (!permissao.granted) {
-      const camera = await ImagePicker.requestCameraPermissionsAsync();
-      if (!camera.granted) {
-        return;
-      }
-    }
+  async function sairDaConta() {
+    await sair();
+  }
 
-    const resultado = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ['images'],
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 0.8,
-    });
-
-    if (!resultado.canceled && resultado.assets[0]) {
-      setFoto(resultado.assets[0].uri);
-    }
+  function voltarParaMenu() {
+    router.back();
+    setOpen(true);
   }
 
   return (
     <SafeAreaView style={styles.safe} edges={['bottom']}>
       <ScreenHeader
+        showBack
+        onBack={voltarParaMenu}
         title="Meu Perfil"
-        subtitle="Gerencie suas informações pessoais e foto de perfil."
+        subtitle="Gerencie suas informações pessoais."
       />
       <KeyboardAvoidingView
         style={styles.flex}
@@ -72,25 +65,6 @@ export default function PerfilScreen() {
           contentContainerStyle={styles.content}
           keyboardShouldPersistTaps="handled"
           showsVerticalScrollIndicator={false}>
-          {/* Foto de perfil */}
-          <ThemedView style={styles.photoCard}>
-            <Pressable onPress={alterarFoto} style={styles.avatarWrap}>
-              {foto ? (
-                <Image source={{ uri: foto }} style={styles.avatar} />
-              ) : (
-                <View style={styles.avatarPlaceholder}>
-                  <MaterialIcons name="person" size={56} color="#0B3D91" />
-                </View>
-              )}
-              <View style={styles.cameraBadge}>
-                <MaterialIcons name="photo-camera" size={18} color="#fff" />
-              </View>
-            </Pressable>
-            <Text style={styles.photoName}>{nome}</Text>
-            <Text style={styles.photoEmail}>{email}</Text>
-          </ThemedView>
-
-          {/* Dados */}
           <ThemedView style={styles.card}>
             {editando ? (
               <>
@@ -177,9 +151,9 @@ export default function PerfilScreen() {
             </View>
           </ThemedView>
 
-          <Pressable style={styles.fotoButton} onPress={alterarFoto}>
-            <MaterialIcons name="add-a-photo" size={20} color="#0B3D91" />
-            <Text style={styles.fotoButtonText}>Alterar foto</Text>
+          <Pressable style={styles.logoutButton} onPress={sairDaConta}>
+            <MaterialIcons name="logout" size={20} color="#C0392B" />
+            <Text style={styles.logoutText}>Sair da conta</Text>
           </Pressable>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -198,61 +172,6 @@ const styles = StyleSheet.create({
   content: {
     padding: 20,
     paddingBottom: 40,
-  },
-  photoCard: {
-    backgroundColor: '#fff',
-    borderRadius: 22,
-    padding: 24,
-    alignItems: 'center',
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 2,
-  },
-  avatarWrap: {
-    position: 'relative',
-    marginBottom: 12,
-  },
-  avatar: {
-    width: 110,
-    height: 110,
-    borderRadius: 55,
-    backgroundColor: '#eef2f5',
-  },
-  avatarPlaceholder: {
-    width: 110,
-    height: 110,
-    borderRadius: 55,
-    backgroundColor: '#e8f6fb',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 3,
-    borderColor: '#0B3D91',
-  },
-  cameraBadge: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    width: 34,
-    height: 34,
-    borderRadius: 17,
-    backgroundColor: '#0B3D91',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 3,
-    borderColor: '#fff',
-  },
-  photoName: {
-    fontSize: 20,
-    fontWeight: '800',
-    color: '#11181c',
-  },
-  photoEmail: {
-    fontSize: 14,
-    color: '#7a8288',
-    marginTop: 4,
   },
   card: {
     backgroundColor: '#fff',
@@ -344,19 +263,16 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
   },
-  fotoButton: {
-    flexDirection: 'row',
+  logoutButton: {
     alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'row',
     gap: 8,
-    backgroundColor: '#fff',
-    borderWidth: 1,
-    borderColor: '#0B3D91',
+    justifyContent: 'center',
+    marginTop: 16,
     paddingVertical: 14,
-    borderRadius: 14,
   },
-  fotoButtonText: {
-    color: '#0B3D91',
+  logoutText: {
+    color: '#C0392B',
     fontSize: 16,
     fontWeight: '700',
   },

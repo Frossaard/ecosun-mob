@@ -37,7 +37,6 @@ export interface DadosPerfil {
   nome: string;
   email: string;
   telefone?: string;
-  foto?: string | null;
 }
 
 class PerfilStore {

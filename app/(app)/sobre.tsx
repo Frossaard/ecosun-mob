@@ -1,9 +1,11 @@
 import { MaterialIcons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { ScreenHeader } from '@/components/screen-header';
 import { ThemedView } from '@/components/themed-view';
+import { useSettingsMenu } from '@/lib/settings-menu';
 
 const IMPORTANCIA = [
   {
@@ -47,9 +49,19 @@ const OBJETIVOS = [
 ];
 
 export default function SobreScreen() {
+  const router = useRouter();
+  const { setOpen } = useSettingsMenu();
+
+  function voltarParaMenu() {
+    router.back();
+    setOpen(true);
+  }
+
   return (
     <SafeAreaView style={styles.safe} edges={['bottom']}>
       <ScreenHeader
+        showBack
+        onBack={voltarParaMenu}
         title="Sobre Nós"
         subtitle="Conheça o EcoSun e a importância da energia solar."
       />

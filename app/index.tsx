@@ -14,25 +14,18 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { PrimaryButton } from '@/components/primary-button';
-
-/**
- * Credenciais de demonstração (mock de autenticação).
- * Qualquer e-mail válido + senha com 6+ caracteres funciona.
- */
-const USUARIO_DEMO = {
-  email: 'demo@ecosun.com.br',
-  senha: '123456',
-};
+import { useAuth } from '@/lib/auth';
 
 export default function LoginScreen() {
   const router = useRouter();
+  const { entrar } = useAuth();
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [loading, setLoading] = useState(false);
   const [erro, setErro] = useState<string | null>(null);
   const [verSenha, setVerSenha] = useState(false);
 
-  function autenticar() {
+  async function autenticar() {
     setErro(null);
 
     const emailValido = /\S+@\S+\.\S+/.test(email.trim());
@@ -46,26 +39,13 @@ export default function LoginScreen() {
     }
 
     setLoading(true);
-
-    // Simula chamada de autenticação (mock).
-    setTimeout(() => {
-      setLoading(false);
-      if (
-        email.trim().toLowerCase() === USUARIO_DEMO.email &&
-        senha === USUARIO_DEMO.senha
-      ) {
-        router.replace('/(app)/form');
-      } else {
-        // Aceita qualquer e-mail válido como login de demonstração.
-        router.replace('/(app)/form');
-      }
-    }, 900);
-  }
-
-  function preencherDemo() {
-    setEmail(USUARIO_DEMO.email);
-    setSenha(USUARIO_DEMO.senha);
-    setErro(null);
+    const mensagem = await entrar(email, senha);
+    setLoading(false);
+    if (mensagem) {
+      setErro(mensagem);
+      return;
+    }
+    router.replace('/(app)/form');
   }
 
   return (
@@ -141,8 +121,8 @@ export default function LoginScreen() {
               icon="→"
             />
 
-            <Pressable onPress={preencherDemo} style={styles.demoButton}>
-              <Text style={styles.demoText}>Usar credenciais de demonstração</Text>
+            <Pressable onPress={() => router.push('/cadastro')} style={styles.demoButton}>
+              <Text style={styles.demoText}>Cadastrar-se</Text>
             </Pressable>
           </View>
 

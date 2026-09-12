@@ -16,9 +16,12 @@ import { ChipSelect } from '@/components/chip-select';
 import { FormField } from '@/components/form-field';
 import { PrimaryButton } from '@/components/primary-button';
 import { ScreenHeader } from '@/components/screen-header';
+import { SettingsDrawer } from '@/components/settings-drawer';
 import { ThemedView } from '@/components/themed-view';
+import { salvarSimulacao } from '@/lib/api';
 import { dimensionarKit, EQUIPAMENTOS, type TipoResidencia } from '@/lib/solar';
-import { kitStore } from '@/lib/store';
+import { kitStore, perfilStore } from '@/lib/store';
+import { useSettingsMenu } from '@/lib/settings-menu';
 
 const TIPOS: { value: TipoResidencia; label: string; icon: 'home-outline' | 'storefront-outline' | 'tree-outline' }[] = [
   { value: 'casa', label: 'Casa', icon: 'home-outline' },
@@ -35,6 +38,7 @@ export default function FormScreen() {
   const [moradores, setMoradores] = useState('');
   const [equipamentos, setEquipamentos] = useState<string[]>([]);
   const [erro, setErro] = useState<string | null>(null);
+  const { open: menuAberto, setOpen: setMenuAberto } = useSettingsMenu();
 
   function toggleEquipamento(nome: string) {
     setEquipamentos((prev) =>
@@ -74,12 +78,21 @@ if (!tipo) {
     const resultado = dimensionarKit(input);
     kitStore.setInput(input);
     kitStore.setResultado(resultado);
+    const perfil = perfilStore.get() ?? {
+      nome: 'Usuário EcoSun',
+      email: 'usuario@ecosun.com.br',
+    };
+    void salvarSimulacao(input, resultado, perfil).catch((error: unknown) => {
+      console.warn('Não foi possível sincronizar a simulação:', error);
+    });
     router.push('/(app)/result');
   }
 
   return (
     <SafeAreaView style={styles.safe} edges={['bottom']}>
       <ScreenHeader
+        showMenu
+        onMenu={() => setMenuAberto(true)}
         step="Etapa 1 de 3"
         title="Sobre sua residência"
         subtitle="Informe seus dados para a IA dimensionar o kit solar ideal para você."
@@ -171,6 +184,7 @@ if (!tipo) {
           <PrimaryButton title="Continuar" onPress={gerarKit} icon="→" />
         </ScrollView>
       </KeyboardAvoidingView>
+      <SettingsDrawer visible={menuAberto} onClose={() => setMenuAberto(false)} />
     </SafeAreaView>
   );
 }
