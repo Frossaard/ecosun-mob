@@ -31,9 +31,19 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   useEffect(() => {
     AsyncStorage.getItem(SESSION_KEY)
       .then((value) => {
-        const sessao = value ? (JSON.parse(value) as Usuario) : null;
-        setUsuario(sessao);
-        if (sessao) perfilStore.set(sessao);
+        if (!value) return null;
+        try {
+          const sessao = JSON.parse(value) as Usuario;
+          setUsuario(sessao);
+          if (sessao) perfilStore.set(sessao);
+          return sessao;
+        } catch (err) {
+          // valor armazenado inválido — remover para evitar loop de parse
+          AsyncStorage.removeItem(SESSION_KEY).catch(() => {});
+          console.warn('Sessão inválida no AsyncStorage; limpando chave de sessão');
+          setUsuario(null);
+          return null;
+        }
       })
       .catch(() => setUsuario(null))
       .finally(() => setCarregando(false));

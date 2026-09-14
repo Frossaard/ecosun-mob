@@ -29,11 +29,26 @@ async function postJson(path: string, body: object) {
   }
 }
 
+async function safeParseJson(response: Response) {
+  const text = await response.text();
+  if (!text) return null;
+  try {
+    return JSON.parse(text);
+  } catch (err) {
+    throw new Error('Resposta inválida da API: JSON malformado');
+  }
+}
+
 async function requestAuth(path: string, body: object): Promise<UsuarioApi> {
   const response = await postJson(`/api/auth/${path}`, body);
-  const payload = (await response.json()) as { success?: boolean; usuario?: UsuarioApi; message?: string };
-  if (!response.ok || !payload.success || !payload.usuario) {
-    throw new Error(payload.message || 'Não foi possível concluir a operação');
+  const payload = (await safeParseJson(response)) as { success?: boolean; usuario?: UsuarioApi; message?: string } | null;
+  if (!response.ok) {
+    // If payload is null or doesn't include a message, provide a generic one
+    const message = payload && payload.message ? payload.message : `Erro ${response.status} ao conectar à API`;
+    throw new Error(message);
+  }
+  if (!payload || !payload.success || !payload.usuario) {
+    throw new Error((payload && payload.message) || 'Não foi possível concluir a operação');
   }
   return payload.usuario;
 }
@@ -53,9 +68,13 @@ export async function salvarSimulacao(
 ): Promise<{ id: number }> {
   const response = await postJson('/api/simulacoes', { input, resultado, perfil });
 
-  const payload = (await response.json()) as { success?: boolean; id?: number; message?: string };
-  if (!response.ok || !payload.success || typeof payload.id !== 'number') {
-    throw new Error(payload.message || 'Não foi possível salvar a simulação');
+  const payload = (await safeParseJson(response)) as { success?: boolean; id?: number; message?: string } | null;
+  if (!response.ok) {
+    const message = payload && payload.message ? payload.message : `Erro ${response.status} ao conectar à API`;
+    throw new Error(message);
+  }
+  if (!payload || !payload.success || typeof payload.id !== 'number') {
+    throw new Error((payload && payload.message) || 'Não foi possível salvar a simulação');
   }
 
   return { id: payload.id };
